@@ -1,4 +1,4 @@
-[match1,match2,cost,oc] = correspondPixels(bmap1,bmap2,maxDist,outlierCost)
+% [match1,match2,cost,oc] = correspondPixels(bmap1,bmap2,maxDist,outlierCost)
 
 % Compute minimum-cost correspondance between two boundary maps.
 % 
@@ -25,18 +25,18 @@
 % given by sub2ind.  Indices of zero denote outliers. The following
 % expressions may be useful:
 
-length(find(bmap1)) + length(find(bmap2))
-			The number of pixels to match.
-length(find(match1)) + length(find(match2))
-			The number of corresponded pixels.
-length(find(bmap1&~match1)) + length(find(bmap2&~match2))
-			The number of outliers.
-[find(match1) match1(find(match1))] 
-			Kx2 list of the K assignment edges.
-sortrows([match2(find(match2)) find(match2)])
-			The same Kx2 list of assignment edges.
-cost - oc * (length(find(bmap1&~match1)) + length(find(bmap2&~match2)))
-			The assignment cost discluding outliers.
+% length(find(bmap1)) + length(find(bmap2))
+% 			The number of pixels to match.
+% length(find(match1)) + length(find(match2))
+% 			The number of corresponded pixels.
+% length(find(bmap1&~match1)) + length(find(bmap2&~match2))
+% 			The number of outliers.
+% [find(match1) match1(find(match1))] 
+% 			Kx2 list of the K assignment edges.
+% sortrows([match2(find(match2)) find(match2)])
+% 			The same Kx2 list of assignment edges.
+% cost - oc * (length(find(bmap1&~match1)) + length(find(bmap2&~match2)))
+% 			The assignment cost discluding outliers.
 
 % See also csaAssign.
 %

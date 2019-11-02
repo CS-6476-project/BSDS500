@@ -9,16 +9,16 @@ for s = 1 : numel(groundTruth)
 end
 
 cnt = 0;
-matches = zeros(total_gt, max(seg(:)));
+matches = zeros(total_gt, max(seg(:)) + 1);
 for s = 1 : numel(groundTruth)
     gt = groundTruth{s}.Segmentation;
 
     num1 = max(gt(:)) + 1; 
-    num2 = max(seg(:)) + 1;
+    num2 = max(seg(:)) + 2;
     confcounts = zeros(num1, num2);
 
     % joint histogram
-    sumim = 1 + gt + seg*num1;
+    sumim = 1 + gt + (seg + 1)*num1;
 
     hs = histc(sumim(:), 1:num1*num2);
     confcounts(:) = confcounts(:) + hs(:);
