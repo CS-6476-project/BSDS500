@@ -10,7 +10,7 @@
 #include "String.hh"
 
 #if NEXTPOW2
-#include <ieee754.h>
+#include "ieee754.h"
 #endif // NEXTPOW2
 
 // TODO: 

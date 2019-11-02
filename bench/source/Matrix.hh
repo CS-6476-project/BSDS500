@@ -18,6 +18,12 @@
 // which depend on having the ieeefp.h header file.
 #define NEXTPOW2 1
 
+class Matrix;
+Matrix rot90 (const Matrix& a, int k = 1);
+Matrix tril (const Matrix& a, int k = 0);
+Matrix triu (const Matrix& a, int k = 0);
+Matrix diag (const Matrix& a, int k = 0);
+
 class Matrix 
 {
 public:
@@ -148,7 +154,7 @@ public:
     friend Matrix transpose (const Matrix& a);
     friend Matrix fliplr (const Matrix& a);
     friend Matrix flipud (const Matrix& a);
-    friend Matrix rot90 (const Matrix& a, int k = 1);
+    friend Matrix rot90 (const Matrix&, int);
 
     // replication
     Matrix repmat (int m, int n) const;
@@ -171,8 +177,8 @@ public:
     // masking
     void tril (int k = 0);	// save lower triangle
     void triu (int k = 0);	// save upper triangle
-    friend Matrix tril (const Matrix& a, int k = 0);
-    friend Matrix triu (const Matrix& a, int k = 0);
+    friend Matrix tril (const Matrix&, int);
+    friend Matrix triu (const Matrix&, int);
 
     // diagonal
     Matrix getdiag (int k = 0) const;	   	// get vector
@@ -180,7 +186,7 @@ public:
     void setdiag (const Matrix& d, int k = 0);	// set from vector
     // make a diagonal matrix if a is a vector
     // extract diagonal as column vector if a is a matrix
-    friend Matrix diag (const Matrix& a, int k = 0); 
+    friend Matrix diag (const Matrix&, int); 
 
     // reductions
     bool any () const;		// logical-or reduction
