@@ -1,0 +1,29 @@
+function plot_f_measures()
+
+base_dir = '../../BSDS500/data/output/';
+output_dirs = {{'deep_learning', 'r', 'EncNet'}, {'k_means/rgb', 'b', 'K-Means, RGB space'}, {'k_means/rgb_pos', [0.5 0.5 0], 'K-Means, RGB + Position space'}, {'k_means/hsv', 'y', 'K-Means, HSV space'}, {'k_means/hsv_pos', 'm', 'K-Means, HSV + Position space'}, {'mean_shift/rgb', 'c', 'Mean Shift, RGB space'}, {'mean_shift/rgb_pos', [0.5 0.5 0.5], 'Mean Shift, RGB + Position space'}, {'mean_shift/hsv', [0.5 0 0.5], 'Mean Shift, HSV space'}, {'mean_shift/hsv_pos', [0 0.5 0.5], 'Mean Shift, HSV + Position space'}};
+evalDirs = {};
+for i=1:length(output_dirs)
+    evalDirs = [evalDirs, [base_dir, output_dirs{i}{1}]];  
+end
+
+fig = open('isoF.fig');
+hold on
+legends = {'[F=0.79] Human'};
+handle = findobj(fig,'Type','line');
+
+for i=1:length(evalDirs)
+    evalDir = evalDirs{i};
+    col = output_dirs{i}{2};
+    string = output_dirs{i}{3};
+
+    if exist(fullfile(evalDir,'eval_bdry_thr.txt'),'file'),
+        evalRes = dlmread(fullfile(evalDir,'eval_bdry.txt'));
+        p1 = plot(evalRes(2),evalRes(3),'o','MarkerFaceColor',col,'MarkerEdgeColor',col,'MarkerSize',8);
+        handle = [handle; p1];
+        legends = [legends, sprintf('[F=%1.2f] %s', evalRes(7), string)];
+    end
+end
+
+hold off
+legend(handle, legends{:}, 'Location', 'southwest')
